@@ -15,7 +15,7 @@ function MyOrdersScreen() {
     const fetchMyOrders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:5000/api/orders/myorders', { // THIS IS THE NEW API ENDPOINT WE'LL CREATE
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/myorders`, { // THIS IS THE NEW API ENDPOINT WE'LL CREATE
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`,
                 },

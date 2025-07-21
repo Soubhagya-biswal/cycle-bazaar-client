@@ -6,7 +6,7 @@ function VerifyEmail() {
     const params = useParams(); // Gets the token from the URL
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/users/verify/${params.token}`)
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/verify/${params.token}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();

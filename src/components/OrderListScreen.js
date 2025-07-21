@@ -17,7 +17,7 @@ function OrderListScreen() {
     const fetchAllOrders = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:5000/api/orders', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders`, {
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`,
                 },
@@ -42,7 +42,7 @@ function OrderListScreen() {
         if (window.confirm('Are you sure you want to delete this order? This action cannot be undone.')) {
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${userInfo.token}`,

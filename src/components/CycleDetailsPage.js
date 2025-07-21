@@ -19,7 +19,7 @@ function CycleDetailsPage() {
         const fetchCycle = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:5000/cycles/${id}`);
+                const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/${id}`);
                 const data = await res.json();
 
                 if (!res.ok) {
@@ -66,7 +66,7 @@ function CycleDetailsPage() {
             return;
         }
         try {
-            const res = await fetch(`http://localhost:5000/api/users/wishlist`, {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/wishlist`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function CycleDetailsPage() {
             : 'Successfully subscribed for stock notification';
 
         try {
-            const res = await fetch(`http://localhost:5000/cycles/${cycle._id}/subscribe`, {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/${cycle._id}/subscribe`, {
                 method: method,
                 headers: { 'Authorization': `Bearer ${userInfo.token}` }
             });
@@ -124,7 +124,7 @@ function CycleDetailsPage() {
             : 'Successfully subscribed for price drop alerts';
 
         try {
-            const res = await fetch(`http://localhost:5000/cycles/${cycle._id}/subscribe-price`, {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/${cycle._id}/subscribe-price`, {
                 method: method,
                 headers: { 'Authorization': `Bearer ${userInfo.token}` }
             });

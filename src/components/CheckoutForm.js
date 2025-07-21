@@ -30,7 +30,7 @@ const CheckoutForm = ({ order, clientSecret, onPaymentSuccess }) => {
         } else if (paymentIntent.status === 'succeeded') {
             // Payment successful, now update the order in our database
             try {
-                await fetch(`http://localhost:5000/api/orders/${order._id}/pay`, {
+                await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${order._id}/pay`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

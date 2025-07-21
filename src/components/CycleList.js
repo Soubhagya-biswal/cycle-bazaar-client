@@ -15,7 +15,7 @@ function CycleList() {
     const fetchCycles = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:5000/cycles?keyword=${keyword || ''}&pageNumber=${pageNumber || 1}`); 
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles?keyword=${keyword || ''}&pageNumber=${pageNumber || 1}`)
         const data = await res.json();
 
         if (!res.ok) { // Check if response was not ok (e.g., 404, 500)

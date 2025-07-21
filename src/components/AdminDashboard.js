@@ -26,13 +26,13 @@ function AdminDashboard() {
   }, []);
 
   const fetchCycles = () => {
-    fetch('http://localhost:5000/cycles/')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/`)
       .then(res => res.json())
       .then(data => setCycles(data.cycles))
       .catch(err => console.error('Error fetching cycles:', err));
   };
      const fetchOrders = () => {
-    fetch('http://localhost:5000/api/orders', {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders`, {
         headers: { 'Authorization': `Bearer ${userInfo.token}` }
     })
     .then(res => res.json())
@@ -45,7 +45,7 @@ function AdminDashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:5000/cycles/add', {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function AdminDashboard() {
 
   const deleteCycle = (id) => {
     if (window.confirm('Are you sure you want to delete this cycle?')) {
-      fetch(`http://localhost:5000/cycles/${id}`, {
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/${id}`, {
         method: 'DELETE',
         headers: {
         },
@@ -89,7 +89,7 @@ function AdminDashboard() {
   };
        const handleCancellationAction = async (orderId, action) => {
     try {
-        const res = await fetch(`http://localhost:5000/api/orders/${orderId}/manage-cancellation`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}/manage-cancellation`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

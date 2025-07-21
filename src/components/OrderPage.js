@@ -31,7 +31,7 @@ function OrderPage() {
     const fetchOrder = async () => {
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}`, {
                 headers: { 'Authorization': `Bearer ${userInfo.token}` },
             });
             const data = await res.json();
@@ -42,7 +42,7 @@ function OrderPage() {
             setSelectedStatus(data.status);
 
             if (!data.isPaid && data.paymentMethod === 'Stripe' && !clientSecret) {
-                const paymentRes = await fetch(`http://localhost:5000/api/orders/${orderId}/create-payment-intent`, {
+                const paymentRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}/create-payment-intent`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${userInfo.token}` },
                 });
@@ -73,7 +73,7 @@ function OrderPage() {
     const updateOrderStatusHandler = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function OrderPage() {
     const markAsPaidHandler = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/api/orders/${orderId}/pay`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}/pay`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ function OrderPage() {
         if (reason) {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:5000/api/orders/${orderId}/cancel`, {
+                const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders/${orderId}/cancel`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ function OrderPage() {
                                                         src={
                                                             item.image.startsWith("http")
                                                                 ? item.image
-                                                                : `http://localhost:5000${item.image}`
+                                                                : `${process.env.REACT_APP_API_BASE_URL}${item.image}`
                                                         }
                                                         alt={item.name}
                                                         fluid

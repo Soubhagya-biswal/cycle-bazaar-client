@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
         const fetchCartItems = async () => {
             if (userInfo) {
                 try {
-                    const res = await fetch('http://localhost:5000/api/cart', {
+                    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/cart`, {
                         headers: { 'Authorization': `Bearer ${userInfo.token}` }
                     });
                     if (res.ok) {
@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch('http://localhost:5000/api/cart/add', {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/cart/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = async (cycleId) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/cart/remove/${cycleId}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/cart/remove/${cycleId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${userInfo.token}`

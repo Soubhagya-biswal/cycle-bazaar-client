@@ -19,7 +19,7 @@ function UserListScreen() {
     const fetchAllUsers = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:5000/api/users', { // API for all users
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users`, { // API for all users
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`,
                 },
@@ -43,7 +43,7 @@ function UserListScreen() {
     if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
         try {
             setLoading(true); // Can add a specific loading state for delete if needed
-            const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`,

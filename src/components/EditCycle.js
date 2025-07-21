@@ -21,7 +21,7 @@ function EditCycle() {
     // Fetch cycle details when component loads or ID changes
     const fetchCycleDetails = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/cycles/${params.id}`);
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/${params.id}`);
         if (!res.ok) {
           throw new Error('Failed to fetch cycle details');
         }
@@ -48,7 +48,7 @@ function EditCycle() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/cycles/update/${params.id}`, {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/cycles/update/${params.id}`, {
       method: 'PUT', // NEW: Changed from POST to PUT (as per backend route change)
       headers: {
         'Content-Type': 'application/json',
